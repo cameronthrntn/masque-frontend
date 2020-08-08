@@ -35,7 +35,7 @@ export default function TopicCard({
 			underlayColor="#000"
 			onPress={() => {
 				navigation.navigate('Comments', {
-					topic: topic,
+					topic_id: topic.id,
 					navigation: navigation,
 				});
 			}}
