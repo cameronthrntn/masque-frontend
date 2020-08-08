@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { TopicCard } from '../atoms';
-import CommentList from '../molecules/CommentList';
-import { TopicInterface } from '../../interfaces';
+import { View, Text, StyleSheet, RefreshControl, FlatList } from 'react-native';
+import { TopicCard, CommentCard } from '../atoms';
+import { TopicInterface, CommentInterface } from '../../interfaces';
 import { getTopic } from '../../services/api';
+import { getComments } from '../../services/api';
+import { mainDark } from '../../../style_variables';
 
 export default function CommentPage({
 	route,
@@ -13,11 +14,24 @@ export default function CommentPage({
 	navigation: any;
 }) {
 	const [topic, setTopic] = useState<TopicInterface>();
+	const [comments, setComments] = useState<CommentInterface[]>([]);
+	const [refreshing, setRefreshing] = useState<boolean>(false);
+
+	const onRefresh = async () => {
+		setRefreshing(true);
+		if (topic) {
+			const data: CommentInterface[] = await getComments(topic.id);
+			setComments(data);
+		}
+		setRefreshing(false);
+	};
 
 	useEffect(() => {
 		const fetchTopic = async (id: number) => {
-			const data: TopicInterface = await getTopic(id);
-			setTopic(data);
+			const topic: TopicInterface = await getTopic(id);
+			const comments: CommentInterface[] = await getComments(topic.id);
+			setTopic(topic);
+			setComments(comments);
 		};
 		fetchTopic(route.params.topic_id);
 	}, []);
@@ -25,10 +39,20 @@ export default function CommentPage({
 	return (
 		<View style={styles.commentPage}>
 			{topic ? (
-				<>
-					<TopicCard topic={topic} navigation={navigation} isStatic />
-					<CommentList topic_id={topic.id} />
-				</>
+				<FlatList
+					data={comments}
+					renderItem={({ item, index, separators }) => {
+						return index === 0 ? (
+							<TopicCard topic={topic} navigation={navigation} isStatic />
+						) : (
+							<CommentCard comment={item} />
+						);
+					}}
+					keyExtractor={(item) => item.id.toString()}
+					refreshControl={
+						<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+					}
+				/>
 			) : (
 				<Text>Loading topic</Text>
 			)}
