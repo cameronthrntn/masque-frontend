@@ -14,7 +14,7 @@ import {
 	disabled,
 } from '../../../style_variables';
 import { TopicInterface } from '../../interfaces';
-import { Thief } from '../../Images/masks';
+import Mask from './Mask';
 
 // const TopicTile = ({ topic }: { topic: TopicInterface }) => <></>;
 
@@ -30,9 +30,7 @@ export default function TopicCard({
 	return isStatic ? (
 		<View style={styles.topicCard}>
 			<View style={styles.commentTopicWrapper}>
-				<View style={styles.maskWrapper}>
-					<Thief color="black" />
-				</View>
+				<Mask mask='thief' colour='red'/>
 				<Text style={styles.title}>{topic.title}...</Text>
 			</View>
 			<Text style={styles.content}>{topic.content}</Text>
@@ -79,13 +77,6 @@ const styles = StyleSheet.create({
 	content: {
 		color: mainLight,
 	},
-	maskWrapper: {
-		width: 50,
-		height: 50,
-		backgroundColor: red,
-		borderRadius: 100,
-		marginRight: 15,
-	},
 	commentTopicWrapper: {
 		flex: 1,
 		// borderColor: 'red',
@@ -102,6 +93,6 @@ const styles = StyleSheet.create({
 		paddingTop: 5,
 		paddingBottom: 5,
 		marginTop: 15,
-		color: mainColour
+		color: mainColour,
 	},
 });
