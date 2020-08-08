@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { CommentInterface } from '../../interfaces';
+import {mainDark, mainColour, mainLight} from '../../../style_variables'
 
 export default function CommentCard({ comment }: { comment: CommentInterface }) {
 	return (
@@ -12,8 +13,8 @@ export default function CommentCard({ comment }: { comment: CommentInterface }) 
 
 const styles = StyleSheet.create({
 	commentCard: {
-		color: 'white',
-		borderBottomColor: '#d1c62e',
+		color: mainLight,
+		borderBottomColor: mainColour,
 		borderWidth: 0.2,
     marginTop: 2,
     padding: 15,
@@ -22,10 +23,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: "bold",
-    color: "white",
+    color: mainLight,
     fontSize: 16
   },
   content: {
-    color: "white"
+    color: mainLight
   }
 });

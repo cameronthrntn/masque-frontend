@@ -6,6 +6,7 @@ import {
 	Button,
 	TouchableHighlight,
 } from 'react-native';
+import { mainColour, mainDark, mainLight } from '../../../style_variables';
 import { TopicInterface } from '../../interfaces';
 
 const TopicTile = ({ topic }: { topic: TopicInterface }) => (
@@ -47,8 +48,8 @@ export default function TopicCard({
 
 const styles = StyleSheet.create({
 	topicCard: {
-		color: 'white',
-		borderBottomColor: '#d1c62e',
+		color: mainLight,
+		borderBottomColor: mainColour,
 		borderWidth: 0.2,
 		marginTop: 2,
 		padding: 15,
@@ -57,10 +58,10 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontWeight: 'bold',
-		color: 'white',
+		color: mainLight,
 		fontSize: 16,
 	},
 	content: {
-		color: 'white',
+		color: mainLight,
 	},
 });

@@ -1,12 +1,45 @@
-import React from 'react';
-import { StyleSheet, Text, View, Dimensions, Button } from 'react-native';
+import React, { useState } from 'react';
+import {
+	mainColour,
+	mainDark,
+	mainColourLight,
+	mainLight,
+} from '../../../style_variables';
+import Logo from '../../Images/masque_logo.svg';
+import SettingsIcon from '../../Images/settings.svg';
+import {
+	StyleSheet,
+	Text,
+	View,
+	Dimensions,
+	TouchableHighlight,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Header() {
+	const [highlighted, toggleHighlighted] = useState<boolean>(false);
 	return (
 		<SafeAreaView>
 			<View style={styles.container}>
-				<Text style={styles.topText}>MASQUE</Text>
+				<View style={{ width: 30 }} />
+				<Logo style={styles.headerIcon} color={mainColour} />
+				<TouchableHighlight
+					activeOpacity={1}
+					underlayColor={mainDark}
+					onShowUnderlay={() => {
+						toggleHighlighted(true);
+					}}
+					onHideUnderlay={() => {
+						toggleHighlighted(false);
+					}}
+					onPress={() => {}}
+				>
+					{highlighted ? (
+						<SettingsIcon style={styles.tilted} />
+					) : (
+						<SettingsIcon style={styles.headerIcon} />
+					)}
+				</TouchableHighlight>
 			</View>
 		</SafeAreaView>
 	);
@@ -14,20 +47,26 @@ export default function Header() {
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: '#1a1a1a',
-		alignItems: 'flex-start',
-		justifyContent: 'center',
-		borderColor: 'blue',
+		backgroundColor: mainDark,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
 		width: Dimensions.get('window').width,
 		height: 40,
-		borderBottomColor: '#d1c62e',
+		borderBottomColor: mainColour,
 		borderBottomWidth: 0.2,
-		overflow: 'hidden',
+		// overflow: 'hidden',
+		padding: 10,
 	},
-	topText: {
-		color: '#d1c62e',
-		fontFamily: 'sans-serif-thin',
-		paddingLeft: 20,
-		fontSize: 40,
+	headerIcon: {
+		height: 30,
+		width: 30,
+		color: mainColour,
+	},
+	tilted: {
+		color: mainColour,
+		height: 30,
+		width: 30,
+		transform: [{ rotate: '25deg' }],
 	},
 });

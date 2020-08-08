@@ -3,6 +3,7 @@ import { View, Text, RefreshControl, FlatList, StyleSheet } from 'react-native';
 import { TopicInterface, CommentInterface } from '../../interfaces';
 import { TopicCard, CommentCard } from '../atoms';
 import { getComments } from '../../services/api';
+import { mainDark } from '../../../style_variables';
 
 export default function CommentList({ topic_id }: { topic_id: number }) {
 	const [comments, setComments] = useState<CommentInterface[]>([]);
@@ -11,7 +12,7 @@ export default function CommentList({ topic_id }: { topic_id: number }) {
 	useEffect(() => {
 		const fetchComments = async () => {
 			const data: CommentInterface[] = await getComments(topic_id);
-			setComments(data);
+			setComments(data);			
 		};
 		fetchComments();
 	}, []);
@@ -44,7 +45,9 @@ export default function CommentList({ topic_id }: { topic_id: number }) {
 
 const styles = StyleSheet.create({
 	listContainer: {
-		backgroundColor: '#1a1a1a'
+		flex: 1,
+		backgroundColor: mainDark
 	},
-	list: {},
+	list: {
+	},
 });

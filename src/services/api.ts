@@ -1,11 +1,12 @@
 import axios from 'axios';
-import { TopicInterface } from '../interfaces'
+import { TopicInterface, CommentInterface } from '../interfaces'
 
 const instance = axios.create({
   baseURL: 'http://localhost:3000',
 })
 
 export async function getTopics() {
+  console.log('fetching topics');
   try {
     const { data }: { data: TopicInterface[] } = await instance.get('/topics')
     return data
@@ -16,85 +17,21 @@ export async function getTopics() {
 }
 
 export async function getComments(topic_id: number) {
-  return [{
-    id: 1,
-    content: 'comment here',
-    mask: 'tengu',
-    colour: 'red'
-  }, {
-    id: 2,
-    content: 'comment here',
-    mask: 'opera',
-    colour: 'black'
-  }, {
-    id: 3,
-    content: 'comment here',
-    mask: 'tengu',
-    colour: 'red'
-  }, {
-    id: 4,
-    content: 'comment here',
-    mask: 'opera',
-    colour: 'black'
-  }, {
-    id: 5,
-    content: 'comment here',
-    mask: 'tengu',
-    colour: 'red'
-  }, {
-    id: 6,
-    content: 'comment here',
-    mask: 'opera',
-    colour: 'black'
-  }, {
-    id: 7,
-    content: 'comment here',
-    mask: 'tengu',
-    colour: 'red'
-  }, {
-    id: 8,
-    content: 'comment here',
-    mask: 'opera',
-    colour: 'black'
-  }, {
-    id: 9,
-    content: 'comment here',
-    mask: 'tengu',
-    colour: 'red'
-  }, {
-    id: 10,
-    content: 'comment here',
-    mask: 'opera',
-    colour: 'black'
-  }, {
-    id: 11,
-    content: 'comment here',
-    mask: 'tengu',
-    colour: 'red'
-  }, {
-    id: 12,
-    content: 'comment here',
-    mask: 'opera',
-    colour: 'black'
-  }, {
-    id: 13,
-    content: 'comment here',
-    mask: 'tengu',
-    colour: 'red'
-  }, {
-    id: 14,
-    content: 'comment here',
-    mask: 'opera',
-    colour: 'black'
-  }, {
-    id: 15,
-    content: 'comment here',
-    mask: 'tengu',
-    colour: 'red'
-  }, {
-    id: 16,
-    content: 'comment here',
-    mask: 'opera',
-    colour: 'black'
-  }]
+  console.log('fetching comments');
+  try {
+    const { data }: { data: CommentInterface[] } = await instance.get(`/topics/${topic_id}/comments`)
+    return data
+  } catch (e) {
+    console.log(e)
+    return [
+      { 
+        id: 0, 
+        content: 'comment not found',
+        created_at: '',
+        updated_at: '',
+        mask_id: 0,
+        reply_id: 0,
+        topic_id: 0,
+        design: 'blank',colour: 'blank' }];
+  }
 }

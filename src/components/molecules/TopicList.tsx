@@ -1,29 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import {
-	StyleSheet,
-	View,
-	FlatList,
-	RefreshControl,
-	Text
-} from 'react-native';
+import { StyleSheet, View, FlatList, RefreshControl } from 'react-native';
+import { mainDark, mainColour } from '../../../style_variables';
 import { getTopics } from '../../services/api';
 import { TopicInterface } from '../../interfaces';
-import {TopicCard} from '../atoms';
+import { TopicCard } from '../atoms';
+import NewThread from '../atoms/NewThread';
 
-export default function TopicList({distance = 100, navigation} : {distance: number, navigation: any}) {
+export default function TopicList({
+	distance = 100,
+	navigation,
+}: {
+	distance: number;
+	navigation: any;
+}) {
 	const [topics, setTopics] = useState<TopicInterface[]>([]);
 	const [refreshing, setRefreshing] = useState<boolean>(false);
 
-	useEffect(() => {		
+	useEffect(() => {
 		const fetchTopics = async () => {
 			const data: TopicInterface[] = await getTopics();
-			setTopics(data);			
+			setTopics(data);
 		};
 		fetchTopics();
 	}, []);
 
 	const renderItem = ({ item }: { item: TopicInterface }) => (
-		<TopicCard topic={item} navigation={navigation} />
+		<TopicCard topic={item} navigation={navigation} isStatic={false} />
 	);
 
 	const onRefresh = async () => {
@@ -34,24 +36,29 @@ export default function TopicList({distance = 100, navigation} : {distance: numb
 	};
 
 	return (
-		<View style={styles.listContainer}>
-			<FlatList
-				data={topics}
-				renderItem={renderItem}
-				keyExtractor={(item) => item.id.toString()}
-				style={styles.list}
-				refreshControl={
-					<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-				}
-			/>
-		</View>
+		<>
+			<View style={styles.listContainer}>
+				<FlatList
+					data={topics}
+					renderItem={renderItem}
+					keyExtractor={(item) => item.id.toString()}
+					style={styles.list}
+					refreshControl={
+						<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+					}
+				/>
+			</View>
+			<NewThread navigation={navigation} />
+		</>
 	);
 }
 
 const styles = StyleSheet.create({
 	listContainer: {
 		flex: 1,
-		backgroundColor: '#1a1a1a',
+		backgroundColor: mainDark,
 	},
-	list: {},
+	list: {
+		elevation: 1,
+	},
 });

@@ -10,6 +10,11 @@ export interface TopicInterface {
 export interface CommentInterface {
   id: number;
   content: string;
-  mask: string;
+  design: string;
   colour: string;
+  created_at: string;
+  updated_at: string;
+  mask_id: number;
+  topic_id: number;
+  reply_id: number;
 }
