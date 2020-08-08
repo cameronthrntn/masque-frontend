@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, StyleSheet, View } from 'react-native';
 import { mainColour, mainColourLight } from '../../../style_variables';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-import NewThreadIcon from '../../Images/new_topic.svg';
+import { NewTopic } from '../../Images/icons';
 
 export default function NewThread({ navigation }: { navigation: any }) {
 	const [highlighted, toggleHighlighted] = useState<boolean>(false);
@@ -24,7 +24,7 @@ export default function NewThread({ navigation }: { navigation: any }) {
 				}}
 				style={{ borderRadius: 100 }}
 			>
-				<NewThreadIcon
+				<NewTopic
 					style={styles.buttonIcon}
 					color={highlighted ? mainColourLight : mainColour}
 				/>

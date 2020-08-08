@@ -1,9 +1,7 @@
 import React from 'react';
 import { TopicList } from '../molecules';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Closest from '../../Images/closest.svg';
-import MiddleDistance from '../../Images/middle_distance.svg';
-import Global from '../../Images/global.svg';
+import { Closest, MiddleDistance, Global } from '../../Images/icons';
 import { StyleSheet } from 'react-native';
 import { mainColour, disabled } from '../../../style_variables';
 
@@ -16,14 +14,16 @@ export default function TopicPage({ navigation }: { navigation: any }) {
 				tabStyle: styles.tab,
 				showLabel: false,
 				activeTintColor: mainColour,
-				inactiveTintColor: disabled
+				inactiveTintColor: disabled,
 			}}
 		>
 			<Tab.Screen
 				name="closest"
 				options={{
 					tabBarLabel: '',
-					tabBarIcon: ({ color, size }) => <Closest style={styles.icon} color={color} />,
+					tabBarIcon: ({ color, size }) => (
+						<Closest style={styles.icon} color={color} />
+					),
 				}}
 			>
 				{() => <TopicList distance={100} navigation={navigation} />}
@@ -43,7 +43,9 @@ export default function TopicPage({ navigation }: { navigation: any }) {
 				name="global"
 				options={{
 					tabBarLabel: '',
-					tabBarIcon: ({ color, size }) => <Global style={styles.icon} color={color} />,
+					tabBarIcon: ({ color, size }) => (
+						<Global style={styles.icon} color={color} />
+					),
 				}}
 			>
 				{() => <TopicList distance={Infinity} navigation={navigation} />}

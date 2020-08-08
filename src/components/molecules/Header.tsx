@@ -6,7 +6,7 @@ import {
 	mainLight,
 } from '../../../style_variables';
 import Logo from '../../Images/masque_logo.svg';
-import SettingsIcon from '../../Images/settings.svg';
+import { Settings } from '../../Images/icons';
 import {
 	StyleSheet,
 	Text,
@@ -35,9 +35,9 @@ export default function Header() {
 					onPress={() => {}}
 				>
 					{highlighted ? (
-						<SettingsIcon style={styles.tilted} />
+						<Settings style={styles.tilted} />
 					) : (
-						<SettingsIcon style={styles.headerIcon} />
+						<Settings style={styles.headerIcon} />
 					)}
 				</TouchableHighlight>
 			</View>
