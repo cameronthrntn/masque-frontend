@@ -39,13 +39,16 @@ export default function CommentPage({
 	const getList = () => {
 		if (topic) {
 			console.log(comments.length);
-			
+
 			return comments.length ? (
 				<FlatList
 					data={comments}
 					renderItem={({ item, index, separators }) => {
 						return index === 0 ? (
-							<TopicCard topic={topic} navigation={navigation} isStatic />
+							<>
+								<TopicCard topic={topic} navigation={navigation} isStatic />
+								<CommentCard comment={item} />
+							</>
 						) : (
 							<CommentCard comment={item} />
 						);
