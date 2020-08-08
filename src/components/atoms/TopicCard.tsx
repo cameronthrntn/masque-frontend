@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { mainColour, mainDark, mainLight } from '../../../style_variables';
 import { TopicInterface } from '../../interfaces';
+import { Thief } from '../../Images/masks';
 
 const TopicTile = ({ topic }: { topic: TopicInterface }) => (
 	<>
@@ -27,6 +28,9 @@ export default function TopicCard({
 }) {
 	return isStatic ? (
 		<View style={styles.topicCard}>
+			<View style={styles.maskWrapper}>
+				<Thief color='black'/>
+			</View>
 			<TopicTile topic={topic} />
 		</View>
 	) : (
@@ -64,4 +68,10 @@ const styles = StyleSheet.create({
 	content: {
 		color: mainLight,
 	},
+	maskWrapper: {
+		width: 75,
+		height: 75,
+		backgroundColor: 'red',
+		borderRadius: 100
+	}
 });

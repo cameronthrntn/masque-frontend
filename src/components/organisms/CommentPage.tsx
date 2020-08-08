@@ -4,7 +4,7 @@ import { TopicCard, CommentCard } from '../atoms';
 import { TopicInterface, CommentInterface } from '../../interfaces';
 import { getTopic } from '../../services/api';
 import { getComments } from '../../services/api';
-import { mainDark } from '../../../style_variables';
+import { mainDark, mainColour } from '../../../style_variables';
 
 export default function CommentPage({
 	route,
@@ -36,9 +36,11 @@ export default function CommentPage({
 		fetchTopic(route.params.topic_id);
 	}, []);
 
-	return (
-		<View style={styles.commentPage}>
-			{topic ? (
+	const getList = () => {
+		if (topic) {
+			console.log(comments.length);
+			
+			return comments.length ? (
 				<FlatList
 					data={comments}
 					renderItem={({ item, index, separators }) => {
@@ -54,8 +56,21 @@ export default function CommentPage({
 					}
 				/>
 			) : (
-				<Text>Loading topic</Text>
-			)}
+				<>
+					<TopicCard topic={topic} navigation={navigation} isStatic />
+					<Text
+						style={{ alignSelf: 'center', marginTop: 20, color: mainColour }}
+					>
+						No Comments loaded
+					</Text>
+				</>
+			);
+		}
+	};
+
+	return (
+		<View style={styles.commentPage}>
+			{topic ? getList() : <Text>Loading topic</Text>}
 		</View>
 	);
 }
