@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 0.2,
 		padding: 15,
 		paddingBottom: 15,
-		flex: 1
 	},
 	commentTopicWrapper: {
 		flexDirection: 'row',
