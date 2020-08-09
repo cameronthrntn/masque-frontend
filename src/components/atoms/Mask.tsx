@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
-import { Thief, Hyottoko, Calacas, Hannya } from '../../Images/masks';
+import { Thief, Hyottoko, Calacas, Hannya, Kitsune } from '../../Images/masks';
 import {
 	red,
 	navy,
@@ -24,6 +24,8 @@ const getMask = (mask: string) => {
 			return <Hannya style={styles.maskStyle as StyleProp<ViewStyle>} />;
 		case 'calacas':
 			return <Calacas style={styles.maskStyle as StyleProp<ViewStyle>} />;
+			case 'kitsune':
+				return <Kitsune style={styles.maskStyle as StyleProp<ViewStyle>} />;
 		default:
 			return <></>;
 	}
