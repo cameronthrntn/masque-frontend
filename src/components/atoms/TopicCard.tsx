@@ -30,12 +30,11 @@ export default function TopicCard({
 	return isStatic ? (
 		<View style={styles.topicCard}>
 			<View style={styles.commentTopicWrapper}>
-				<Mask mask='thief' colour='red'/>
+				<Mask mask={topic.design} colour={topic.colour}/>
 				<Text style={styles.title}>{topic.title}...</Text>
 			</View>
 			<Text style={styles.content}>{topic.content}</Text>
 			<Text style={styles.timer}>Time left: 15m 43s</Text>
-			{/* <TopicTile topic={topic} /> */}
 		</View>
 	) : (
 		<TouchableHighlight
@@ -53,8 +52,6 @@ export default function TopicCard({
 				<Text style={styles.title}>{topic.title}</Text>
 				<Text style={styles.content}>{topic.content}</Text>
 			</>
-
-			{/* <TopicTile topic={topic} /> */}
 		</TouchableHighlight>
 	);
 }

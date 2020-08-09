@@ -3,7 +3,8 @@ export interface TopicInterface {
   title: string;
   content: string;
   created_at: string;
-  updated_at: string;
+  design: string;
+  colour: string;
   user_id: number;
 }
 
