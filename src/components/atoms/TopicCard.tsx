@@ -1,22 +1,8 @@
 import React from 'react';
-import {
-	StyleSheet,
-	View,
-	Text,
-	Button,
-	TouchableHighlight,
-} from 'react-native';
-import {
-	mainColour,
-	mainDark,
-	mainLight,
-	red,
-	disabled,
-} from '../../../style_variables';
+import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
+import { mainColour, mainLight } from '../../../style_variables';
 import { TopicInterface } from '../../interfaces';
 import Mask from './Mask';
-
-// const TopicTile = ({ topic }: { topic: TopicInterface }) => <></>;
 
 export default function TopicCard({
 	topic,
@@ -30,7 +16,7 @@ export default function TopicCard({
 	return isStatic ? (
 		<View style={styles.topicCard}>
 			<View style={styles.commentTopicWrapper}>
-				<Mask mask={topic.design} colour={topic.colour}/>
+				<Mask mask={topic.design} colour={topic.colour} />
 				<Text style={styles.title}>{topic.title}...</Text>
 			</View>
 			<Text style={styles.content}>{topic.content}</Text>
@@ -63,6 +49,13 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 0.2,
 		padding: 15,
 		paddingBottom: 15,
+		flex: 1
+	},
+	commentTopicWrapper: {
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginBottom: 15,
 	},
 	title: {
 		fontWeight: 'bold',
@@ -73,15 +66,6 @@ const styles = StyleSheet.create({
 	},
 	content: {
 		color: mainLight,
-	},
-	commentTopicWrapper: {
-		flex: 1,
-		// borderColor: 'red',
-		// borderWidth: 1,
-		flexDirection: 'row',
-		marginBottom: 15,
-		justifyContent: 'center',
-		alignItems: 'center',
 	},
 	timer: {
 		borderColor: mainLight,

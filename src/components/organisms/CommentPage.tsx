@@ -4,7 +4,7 @@ import { TopicCard, CommentCard } from '../atoms';
 import { TopicInterface, CommentInterface } from '../../interfaces';
 import { getTopic } from '../../services/api';
 import { getComments } from '../../services/api';
-import { mainDark, mainColour } from '../../../style_variables';
+import { mainColour } from '../../../style_variables';
 
 export default function CommentPage({
 	route,

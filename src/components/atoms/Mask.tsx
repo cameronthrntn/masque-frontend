@@ -10,6 +10,8 @@ import {
 	orange,
 	yellow,
 	green,
+	mainColour,
+	mainLight,
 } from '../../../style_variables';
 
 const getMask = (mask: string) => {
@@ -60,6 +62,8 @@ const styles = StyleSheet.create({
 		width: 50,
 		height: 50,
 		borderRadius: 100,
+		borderColor: mainLight,
+		borderWidth: 2,
 		marginRight: 15,
 	},
 	maskStyle: { color: '#000' },
