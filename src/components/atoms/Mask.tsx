@@ -1,14 +1,30 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Thief, Hyottoko } from '../../Images/masks';
-import { red } from '../../../style_variables';
+import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import { Thief, Hyottoko, Calacas, Hannya } from '../../Images/masks';
+import {
+	red,
+	navy,
+	cyan,
+	purple,
+	pink,
+	orange,
+	yellow,
+	green,
+} from '../../../style_variables';
 
 const getMask = (mask: string) => {
-	return mask === 'thief' ? (
-		<Thief style={styles.maskStyle} />
-	) : (
-		<Hyottoko style={styles.maskStyle} />
-	);
+	switch (mask) {
+		case 'thief':
+			return <Thief style={styles.maskStyle as StyleProp<ViewStyle>} />;
+		case 'hyottoko':
+			return <Hyottoko style={styles.maskStyle as StyleProp<ViewStyle>} />;
+		case 'hannya':
+			return <Hannya style={styles.maskStyle as StyleProp<ViewStyle>} />;
+		case 'calacas':
+			return <Calacas style={styles.maskStyle as StyleProp<ViewStyle>} />;
+		default:
+			return <></>;
+	}
 };
 
 interface ColoursInterface {
@@ -22,7 +38,16 @@ export default function Mask({
 	mask: string;
 	colour: string;
 }) {
-	const colours: ColoursInterface = { red: red, blue: '#0f0' };
+	const colours: ColoursInterface = {
+		red,
+		navy,
+		cyan,
+		purple,
+		pink,
+		orange,
+		yellow,
+		green,
+	};
 	return (
 		<View style={[styles.maskWrapper, { backgroundColor: colours[colour] }]}>
 			{getMask(mask)}

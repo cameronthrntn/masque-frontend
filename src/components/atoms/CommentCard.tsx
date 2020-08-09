@@ -11,7 +11,7 @@ export default function CommentCard({
 }) {
 	return (
 		<View style={styles.commentCard}>
-			<Mask mask={Math.random() > 0.5 ? 'thief' : 'hyottoko'} colour="red" />
+			<Mask mask={comment.design} colour={comment.colour} />
 			<Text style={styles.content}>{comment.content}</Text>
 		</View>
 	);
