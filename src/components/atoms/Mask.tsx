@@ -9,6 +9,9 @@ import {
 	Opera,
 	Festima,
 	Carnivale,
+	Huichol,
+	Tragedy,
+	Comedy,
 } from '../../Images/masks';
 import {
 	red,
@@ -41,6 +44,12 @@ const getMask = (mask: string) => {
 			return <Festima style={styles.maskStyle as StyleProp<ViewStyle>} />;
 		case 'carnivale':
 			return <Carnivale style={styles.maskStyle as StyleProp<ViewStyle>} />;
+		case 'huichol':
+			return <Huichol style={styles.maskStyle as StyleProp<ViewStyle>} />;
+		case 'tragedy':
+			return <Tragedy style={styles.maskStyle as StyleProp<ViewStyle>} />;
+		case 'comedy':
+			return <Comedy style={styles.maskStyle as StyleProp<ViewStyle>} />;
 		default:
 			return <></>;
 	}

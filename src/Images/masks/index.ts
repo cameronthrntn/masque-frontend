@@ -6,3 +6,6 @@ export {default as Kitsune} from './kitsune.svg';
 export {default as Opera} from './opera.svg';
 export {default as Festima} from './festima.svg';
 export {default as Carnivale} from './carnivale.svg';
+export {default as Huichol} from './huichol.svg';
+export {default as Tragedy} from './tragedy.svg';
+export {default as Comedy} from './comedy.svg';
