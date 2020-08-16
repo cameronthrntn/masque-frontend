@@ -6,9 +6,9 @@ const instance = axios.create({
 })
 
 export async function getTopics(distance: string, latitude: number, longitude: number) {
-  console.log(distance, latitude, longitude);
   try {
     const { data }: { data: TopicInterface[] } = await instance.get('/topics', { params: { distance, latitude, longitude } })
+    console.log(`${data.length} topics recieved`);
     return data
   } catch (e) {
     throw e;

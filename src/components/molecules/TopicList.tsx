@@ -28,8 +28,8 @@ export default function TopicList({
 				async ({ coords: { latitude, longitude } }) => {
 					const data: TopicInterface[] = await getTopics(
 						distance,
-						latitude,
-						longitude
+						-106.018,
+						34.542
 					);
 					setTopics(data);
 				},
@@ -50,8 +50,8 @@ export default function TopicList({
 			async ({ coords: { latitude, longitude } }) => {
 				const data: TopicInterface[] = await getTopics(
 					distance,
-					latitude,
-					longitude
+					-106.018,
+					34.542
 				);
 				setTopics(data);
 			},
