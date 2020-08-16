@@ -48,7 +48,7 @@ export default function TopicPage({ navigation }: { navigation: any }) {
 					),
 				}}
 			>
-				{() => <TopicList distance={Infinity} navigation={navigation} />}
+				{() => <TopicList distance={999999999} navigation={navigation} />}
 			</Tab.Screen>
 		</Tab.Navigator>
 	);

@@ -19,3 +19,8 @@ export interface CommentInterface {
   topic_id: number;
   reply_id: number;
 }
+
+export interface CoordinatesInterface {
+  latitude: number;
+  longitude: number
+}

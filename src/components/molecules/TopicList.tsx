@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, FlatList, RefreshControl } from 'react-native';
-import { mainDark, mainColour } from '../../../style_variables';
+import {
+	StyleSheet,
+	View,
+	FlatList,
+	RefreshControl,
+	Alert,
+} from 'react-native';
+import { mainDark, mainColour, red } from '../../../style_variables';
 import { getTopics } from '../../services/api';
 import { TopicInterface } from '../../interfaces';
 import { TopicCard } from '../atoms';
@@ -18,8 +24,18 @@ export default function TopicList({
 
 	useEffect(() => {
 		const fetchTopics = async () => {
-			const data: TopicInterface[] = await getTopics();
-			setTopics(data);
+			navigator.geolocation.getCurrentPosition(
+				async ({ coords: { latitude, longitude } }) => {
+					const data: TopicInterface[] = await getTopics(
+						distance,
+						latitude,
+						longitude
+					);
+					setTopics(data);
+				},
+				(error) => Alert.alert(error.message),
+				{ enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 }
+			);
 		};
 		fetchTopics();
 	}, []);
@@ -30,8 +46,18 @@ export default function TopicList({
 
 	const onRefresh = async () => {
 		setRefreshing(true);
-		const data: TopicInterface[] = await getTopics();
-		setTopics(data);
+		navigator.geolocation.getCurrentPosition(
+			async ({ coords: { latitude, longitude } }) => {
+				const data: TopicInterface[] = await getTopics(
+					distance,
+					latitude,
+					longitude
+				);
+				setTopics(data);
+			},
+			(error) => Alert.alert(error.message),
+			{ enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 }
+		);
 		setRefreshing(false);
 	};
 
@@ -58,7 +84,5 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: mainDark,
 	},
-	list: {
-		elevation: 1,
-	},
+	list: {},
 });

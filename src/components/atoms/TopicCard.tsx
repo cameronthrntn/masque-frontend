@@ -13,8 +13,8 @@ export default function TopicCard({
 	navigation: any;
 	isStatic: boolean;
 }) {
-	return isStatic ? (
-		<View style={styles.topicCard}>
+  return isStatic ? (
+    <View style={styles.topicCard}>
 			<View style={styles.commentTopicWrapper}>
 				<Mask mask={topic.design} colour={topic.colour} />
 				<Text style={styles.title}>{topic.title}...</Text>
@@ -23,10 +23,10 @@ export default function TopicCard({
 			<Text style={styles.timer}>Time left: 15m 43s</Text>
 		</View>
 	) : (
-		<TouchableHighlight
-			activeOpacity={1}
-			underlayColor="#000"
-			onPress={() => {
+    <TouchableHighlight
+    activeOpacity={1}
+    underlayColor="#000"
+    onPress={() => {
 				navigation.navigate('Comments', {
 					topic_id: topic.id,
 					navigation: navigation,
