@@ -13,10 +13,10 @@ import { TopicCard } from '../atoms';
 import NewThread from '../atoms/NewThread';
 
 export default function TopicList({
-	distance = 100,
+	distance = 'furthest',
 	navigation,
 }: {
-	distance: number;
+	distance: string;
 	navigation: any;
 }) {
 	const [topics, setTopics] = useState<TopicInterface[]>([]);

@@ -26,7 +26,7 @@ export default function TopicPage({ navigation }: { navigation: any }) {
 					),
 				}}
 			>
-				{() => <TopicList distance={100} navigation={navigation} />}
+				{() => <TopicList distance='closest' navigation={navigation} />}
 			</Tab.Screen>
 			<Tab.Screen
 				name="middle"
@@ -37,7 +37,7 @@ export default function TopicPage({ navigation }: { navigation: any }) {
 					},
 				}}
 			>
-				{() => <TopicList distance={200} navigation={navigation} />}
+				{() => <TopicList distance='midrange' navigation={navigation} />}
 			</Tab.Screen>
 			<Tab.Screen
 				name="global"
@@ -48,7 +48,7 @@ export default function TopicPage({ navigation }: { navigation: any }) {
 					),
 				}}
 			>
-				{() => <TopicList distance={999999999} navigation={navigation} />}
+				{() => <TopicList distance='furthest' navigation={navigation} />}
 			</Tab.Screen>
 		</Tab.Navigator>
 	);
