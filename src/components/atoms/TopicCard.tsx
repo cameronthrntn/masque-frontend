@@ -35,7 +35,7 @@ export default function TopicCard({
 			style={styles.topicCard}
 		>
 			<>
-				<Text style={styles.title}>{topic.title}</Text>
+    <Text style={styles.title}>{topic.title}</Text>
 				<Text style={styles.content}>{topic.content}</Text>
 			</>
 		</TouchableHighlight>

@@ -5,10 +5,10 @@ const instance = axios.create({
   baseURL: 'http://localhost:3000',
 })
 
-export async function getTopics(distance: string, latitude: number, longitude: number) {
+export async function getTopics(distance: string, latitude: number, longitude: number, page: number) {
+  const amount = 10;  
   try {
-    const { data }: { data: TopicInterface[] } = await instance.get('/topics', { params: { distance, latitude, longitude } })
-    console.log(`${data.length} topics recieved`);
+    const { data }: { data: TopicInterface[] } = await instance.get('/topics', { params: { distance, latitude, longitude, amount, page } })
     return data
   } catch (e) {
     throw e;

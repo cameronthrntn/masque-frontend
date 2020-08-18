@@ -20,17 +20,20 @@ export default function TopicList({
 	navigation: any;
 }) {
 	const [topics, setTopics] = useState<TopicInterface[]>([]);
-	const [refreshing, setRefreshing] = useState<boolean>(false);
+  const [refreshing, setRefreshing] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
 
 	useEffect(() => {
+    console.log('mounted', distance);
 		const fetchTopics = async () => {
 			navigator.geolocation.getCurrentPosition(
 				async ({ coords: { latitude, longitude } }) => {
 					const data: TopicInterface[] = await getTopics(
 						distance,
 						-106.018,
-						34.542
-					);
+            34.542,
+            page
+          );          
 					setTopics(data);
 				},
 				(error) => Alert.alert(error.message),
@@ -38,20 +41,41 @@ export default function TopicList({
 			);
 		};
 		fetchTopics();
-	}, []);
+  }, []);
+  
+  useEffect(() => {
+		const fetchTopics = async () => {
+			navigator.geolocation.getCurrentPosition(
+				async ({ coords: { latitude, longitude } }) => {
+					const data: TopicInterface[] = await getTopics(
+						distance,
+						-106.018,
+            34.542,
+            page
+					);
+					setTopics([...topics, ...data]);
+				},
+				(error) => Alert.alert(error.message),
+				{ enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 }
+			);
+		};
+		fetchTopics();
+	}, [page]);
 
 	const renderItem = ({ item }: { item: TopicInterface }) => (
 		<TopicCard topic={item} navigation={navigation} isStatic={false} />
 	);
 
 	const onRefresh = async () => {
-		setRefreshing(true);
+    setRefreshing(true);
+    setPage(1)
 		navigator.geolocation.getCurrentPosition(
 			async ({ coords: { latitude, longitude } }) => {
 				const data: TopicInterface[] = await getTopics(
 					distance,
 					-106.018,
-					34.542
+          34.542,
+          page
 				);
 				setTopics(data);
 			},
@@ -71,7 +95,9 @@ export default function TopicList({
 					style={styles.list}
 					refreshControl={
 						<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-					}
+          }
+          onEndReached={(() => setPage(page + 1))}
+          onEndReachedThreshold={0.3}
 				/>
 			</View>
 			<NewThread navigation={navigation} />

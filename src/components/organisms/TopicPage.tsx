@@ -14,8 +14,9 @@ export default function TopicPage({ navigation }: { navigation: any }) {
 				tabStyle: styles.tab,
 				showLabel: false,
 				activeTintColor: mainColour,
-				inactiveTintColor: disabled,
-			}}
+        inactiveTintColor: disabled,
+      }}
+      lazy={true}
 		>
 			<Tab.Screen
 				name="closest"
