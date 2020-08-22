@@ -17,11 +17,7 @@ export default function NewThread({ navigation }: { navigation: any }) {
 				onHideUnderlay={() => {
 					toggleHighlighted(false);
 				}}
-				onPress={() => {
-					navigation.navigate('TopicPost', {
-						navigation: navigation,
-					});
-				}}
+				onPress={() => navigation.navigate('TopicPost')}
 				style={{ borderRadius: 100 }}
 			>
 				<NewTopic

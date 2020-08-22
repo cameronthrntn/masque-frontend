@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, RefreshControl, FlatList, ActivityIndicator } from 'react-native';
+import {
+	View,
+	Text,
+	StyleSheet,
+	RefreshControl,
+	FlatList,
+	ActivityIndicator,
+} from 'react-native';
 import { TopicCard, CommentCard } from '../atoms';
 import { TopicInterface, CommentInterface } from '../../interfaces';
 import { getTopic } from '../../services/api';
@@ -71,7 +78,11 @@ export default function CommentPage({
 
 	return (
 		<View style={styles.commentPage}>
-			{topic ? getList() : <ActivityIndicator  size="large" color={mainColour}/>}
+			{topic ? (
+				getList()
+			) : (
+				<ActivityIndicator size="large" color={mainColour} />
+			)}
 		</View>
 	);
 }
