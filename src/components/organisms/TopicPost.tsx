@@ -5,6 +5,7 @@ import {
 	TextInput,
 	StyleSheet,
 	TouchableHighlight,
+	Alert,
 } from 'react-native';
 import {
 	mainColour,
@@ -13,7 +14,9 @@ import {
 	mainDark,
 	disabled,
 } from '../../../style_variables';
+import { postTopic } from '../../services/api';
 import { render } from 'react-dom';
+import { TopicInterface } from '../../interfaces';
 
 export default function TopicPost({ navigation }: { navigation: any }) {
 	const [topicTitle, setTopicTitle] = useState<string>('');
@@ -31,7 +34,7 @@ export default function TopicPost({ navigation }: { navigation: any }) {
 				autoCapitalize="words"
 				maxLength={125}
 				autoFocus
-				placeholder='Enter a title (Max 125)'
+				placeholder="Enter a title (Max 125)"
 				placeholderTextColor={disabled}
 			/>
 			<TextInput
@@ -39,7 +42,7 @@ export default function TopicPost({ navigation }: { navigation: any }) {
 				value={topicText}
 				style={[styles.input, styles.textInput]}
 				multiline
-				placeholder='Say what you want to say'
+				placeholder="Say what you want to say"
 				placeholderTextColor={disabled}
 			/>
 			<TouchableHighlight
@@ -52,10 +55,20 @@ export default function TopicPost({ navigation }: { navigation: any }) {
 					toggleHighlighted(false);
 				}}
 				onPress={() => {
-					navigation.navigate('Comments', {
-						topic_id: 1,
-						navigation: navigation,
-					});
+					navigator.geolocation.getCurrentPosition(
+						async ({ coords: { latitude, longitude } }) => {
+							const posted: TopicInterface = await postTopic(
+								topicTitle,
+								topicText,
+								4,
+								longitude,
+								latitude
+							);
+							navigation.navigate('Comments', { topic_id: posted.id });
+						},
+						(error) => Alert.alert(error.message),
+						{ enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 }
+					);
 				}}
 				style={styles.submit}
 			>
