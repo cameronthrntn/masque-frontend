@@ -3,3 +3,5 @@ declare module "*.svg" {
   const content: React.FC<SvgProps & { fillSecondary?: string; }>;
   export default content;
 }
+
+declare module 'react-native-countdown-component';
