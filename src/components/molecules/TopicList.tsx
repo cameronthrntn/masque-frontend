@@ -24,7 +24,6 @@ export default function TopicList({
   const [page, setPage] = useState<number>(1);
 
 	useEffect(() => {
-    console.log('mounted', distance);
 		const fetchTopics = async () => {
 			navigator.geolocation.getCurrentPosition(
 				async ({ coords: { latitude, longitude } }) => {

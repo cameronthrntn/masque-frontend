@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
-import { mainColour, mainLight } from '../../../style_variables';
+import { mainColour, mainLight, red, mainDark } from '../../../style_variables';
 import { TopicInterface } from '../../interfaces';
+import CountDown from 'react-native-countdown-component';
+import moment from 'moment';
 import Mask from './Mask';
+
+const secondsToHms = (d: number) => {
+	var h = Math.floor(d / 3600);
+	var m = Math.floor((d % 3600) / 60);
+	var s = Math.floor((d % 3600) % 60);
+
+	var hDisplay = h > 0 ? h + (h == 1 ? ' hour, ' : ' hours, ') : '';
+	var mDisplay = m > 0 ? m + (m == 1 ? ' minute, ' : ' minutes, ') : '';
+	var sDisplay = s > 0 ? s + (s == 1 ? ' second' : ' seconds') : '';
+	return hDisplay + mDisplay + sDisplay;
+};
 
 export default function TopicCard({
 	topic,
@@ -13,6 +26,10 @@ export default function TopicCard({
 	navigation: any;
 	isStatic: boolean;
 }) {
+	const date = new Date(topic.created_at);
+	const timerVal = (Date.now() - date.getTime()) / 1000;
+  const [timeLeft] = useState<number>(7200 - timerVal);
+  
 	return isStatic ? (
 		<View style={styles.topicCard}>
 			<View style={styles.commentTopicWrapper}>
@@ -20,7 +37,18 @@ export default function TopicCard({
 				<Text style={styles.title}>{topic.title}...</Text>
 			</View>
 			<Text style={styles.content}>{topic.content}</Text>
-			<Text style={styles.timer}>Time left: 15m 43s</Text>
+			<CountDown
+				until={timeLeft}
+				onFinish={() => alert('finished')}
+				size={20}
+				style={styles.countdown}
+				digitStyle={styles.countdownDigits}
+				digitTxtStyle={styles.mainColour}
+				separatorStyle={styles.mainColour}
+				timeToShow={['H', 'M', 'S']}
+				timeLabels={{}}
+				showSeparator
+			/>
 		</View>
 	) : (
 		<TouchableHighlight
@@ -61,13 +89,14 @@ const styles = StyleSheet.create({
 	content: {
 		color: mainLight,
 	},
-	timer: {
-		borderColor: mainLight,
-		borderTopWidth: 0.2,
-		borderBottomWidth: 0.2,
-		paddingTop: 5,
-		paddingBottom: 5,
-		marginTop: 15,
+	countdown: {
+		marginTop: 10,
+	},
+	countdownDigits: {
+		backgroundColor: mainDark,
+		color: mainColour,
+	},
+	mainColour: {
 		color: mainColour,
 	},
 });
