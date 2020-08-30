@@ -1,50 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
-import { mainColour, mainLight, red, mainDark } from '../../../style_variables';
+import {
+	mainColour,
+	mainLight,
+	mainDark,
+	disabled,
+} from '../../../style_variables';
 import { TopicInterface } from '../../interfaces';
 import CountDown from 'react-native-countdown-component';
-import moment from 'moment';
 import Mask from './Mask';
-
-const secondsToHms = (d: number) => {
-	var h = Math.floor(d / 3600);
-	var m = Math.floor((d % 3600) / 60);
-	var s = Math.floor((d % 3600) % 60);
-
-	var hDisplay = h > 0 ? h + (h == 1 ? ' hour, ' : ' hours, ') : '';
-	var mDisplay = m > 0 ? m + (m == 1 ? ' minute, ' : ' minutes, ') : '';
-	var sDisplay = s > 0 ? s + (s == 1 ? ' second' : ' seconds') : '';
-	return hDisplay + mDisplay + sDisplay;
-};
+import { Lock } from '../../Images/icons';
+import LockPage from '../organisms/LockPage';
 
 export default function TopicCard({
 	topic,
 	navigation,
 	isStatic,
+	expired,
+	setExpired,
 }: {
 	topic: TopicInterface;
 	navigation: any;
 	isStatic: boolean;
+	expired: boolean;
+	setExpired: any;
 }) {
 	const date = new Date(topic.created_at);
 	const timerVal = (Date.now() - date.getTime()) / 1000;
-  const [timeLeft] = useState<number>(7200 - timerVal);
-  
+	const [timeLeft] = useState<number>(7200 - timerVal);
+
 	return isStatic ? (
 		<View style={styles.topicCard}>
 			<View style={styles.commentTopicWrapper}>
-				<Mask mask={topic.design} colour={topic.colour} />
+				<Mask mask={topic.design} colour={topic.colour} expired={expired} />
 				<Text style={styles.title}>{topic.title}...</Text>
 			</View>
 			<Text style={styles.content}>{topic.content}</Text>
 			<CountDown
 				until={timeLeft}
-				onFinish={() => alert('finished')}
+				onFinish={() => setExpired(true)}
 				size={20}
 				style={styles.countdown}
 				digitStyle={styles.countdownDigits}
-				digitTxtStyle={styles.mainColour}
-				separatorStyle={styles.mainColour}
+				digitTxtStyle={{ color: expired ? disabled : mainColour }}
+				separatorStyle={{ color: expired ? disabled : mainColour }}
 				timeToShow={['H', 'M', 'S']}
 				timeLabels={{}}
 				showSeparator
@@ -94,9 +93,6 @@ const styles = StyleSheet.create({
 	},
 	countdownDigits: {
 		backgroundColor: mainDark,
-		color: mainColour,
-	},
-	mainColour: {
 		color: mainColour,
 	},
 });

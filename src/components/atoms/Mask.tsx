@@ -12,6 +12,7 @@ import {
 	Huichol,
 	Tragedy,
 	Comedy,
+	Broken,
 } from '../../Images/masks';
 import {
 	red,
@@ -24,6 +25,7 @@ import {
 	green,
 	mainColour,
 	mainLight,
+	disabled,
 } from '../../../style_variables';
 
 const getMask = (mask: string) => {
@@ -51,7 +53,7 @@ const getMask = (mask: string) => {
 		case 'comedy':
 			return <Comedy style={styles.maskStyle as StyleProp<ViewStyle>} />;
 		default:
-			return <></>;
+			return <Broken style={styles.maskStyle as StyleProp<ViewStyle>} />;
 	}
 };
 
@@ -62,9 +64,11 @@ interface ColoursInterface {
 export default function Mask({
 	mask,
 	colour,
+	expired,
 }: {
 	mask: string;
 	colour: string;
+	expired: boolean;
 }) {
 	const colours: ColoursInterface = {
 		red,
@@ -76,9 +80,16 @@ export default function Mask({
 		yellow,
 		green,
 	};
+	console.log(expired);
+
 	return (
-		<View style={[styles.maskWrapper, { backgroundColor: colours[colour] }]}>
-			{getMask(mask)}
+		<View
+			style={[
+				styles.maskWrapper,
+				{ backgroundColor: expired ? disabled : colours[colour] },
+			]}
+		>
+			{getMask(expired ? 'expired' : mask)}
 		</View>
 	);
 }

@@ -6,12 +6,14 @@ import Mask from './Mask';
 
 export default function CommentCard({
 	comment,
+	expired,
 }: {
 	comment: CommentInterface;
+	expired: boolean;
 }) {
 	return (
 		<View style={styles.commentCard}>
-			<Mask mask={comment.design} colour={comment.colour} />
+			<Mask mask={comment.design} colour={comment.colour} expired={expired} />
 			<Text style={styles.content}>{comment.content}</Text>
 		</View>
 	);

@@ -9,3 +9,4 @@ export {default as Carnivale} from './carnivale.svg';
 export {default as Huichol} from './huichol.svg';
 export {default as Tragedy} from './tragedy.svg';
 export {default as Comedy} from './comedy.svg';
+export {default as Broken} from './broken.svg';

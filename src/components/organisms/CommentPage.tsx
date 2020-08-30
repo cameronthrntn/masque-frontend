@@ -12,6 +12,7 @@ import { TopicInterface, CommentInterface } from '../../interfaces';
 import { getTopic } from '../../services/api';
 import { getComments } from '../../services/api';
 import { mainColour } from '../../../style_variables';
+import LockPage from './LockPage';
 
 export default function CommentPage({
 	route,
@@ -23,6 +24,7 @@ export default function CommentPage({
 	const [topic, setTopic] = useState<TopicInterface>();
 	const [comments, setComments] = useState<CommentInterface[]>([]);
 	const [refreshing, setRefreshing] = useState<boolean>(false);
+	const [expired, setExpired] = useState<boolean>(false);
 
 	const onRefresh = async () => {
 		setRefreshing(true);
@@ -51,11 +53,17 @@ export default function CommentPage({
 					renderItem={({ item, index, separators }) => {
 						return index === 0 ? (
 							<>
-								<TopicCard topic={topic} navigation={navigation} isStatic />
-								<CommentCard comment={item} />
+								<TopicCard
+									topic={topic}
+									navigation={navigation}
+									isStatic
+									expired={expired}
+									setExpired={setExpired}
+								/>
+								<CommentCard comment={item} expired={expired} />
 							</>
 						) : (
-							<CommentCard comment={item} />
+							<CommentCard comment={item} expired={expired} />
 						);
 					}}
 					keyExtractor={(item) => item.id.toString()}
@@ -65,7 +73,13 @@ export default function CommentPage({
 				/>
 			) : (
 				<>
-					<TopicCard topic={topic} navigation={navigation} isStatic />
+					<TopicCard
+						topic={topic}
+						navigation={navigation}
+						isStatic
+						expired={expired}
+						setExpired={setExpired}
+					/>
 					<Text
 						style={{ alignSelf: 'center', marginTop: 20, color: mainColour }}
 					>
@@ -83,6 +97,7 @@ export default function CommentPage({
 			) : (
 				<ActivityIndicator size="large" color={mainColour} />
 			)}
+			<LockPage />
 		</View>
 	);
 }

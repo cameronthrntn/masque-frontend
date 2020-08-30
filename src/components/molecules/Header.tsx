@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
 		height: 40,
 		borderBottomColor: mainColour,
 		borderBottomWidth: 0.2,
-		// overflow: 'hidden',
 		padding: 10,
 	},
 	headerIcon: {
