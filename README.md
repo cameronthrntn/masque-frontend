@@ -1,9 +1,3 @@
-<style>
-  ul {
-    list-style: none;
-  }
-</style>
-
 <h1 align="center" style="color: #26ed97">
   MASQUE 🎭
 </h1>
