@@ -80,8 +80,6 @@ export default function Mask({
 		yellow,
 		green,
 	};
-	console.log(expired);
-
 	return (
 		<View
 			style={[
