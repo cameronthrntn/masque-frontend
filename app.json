@@ -8,6 +8,10 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "splash": {
+      "image": "./src/images/masque_logo.png",
+      "backgroundColor": "#151c17"
+    },
     "packagerOpts": {
       "config": "metro.config.js",
       "sourceExts": [
