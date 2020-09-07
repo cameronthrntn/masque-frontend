@@ -1,9 +1,9 @@
-import React from 'react';
-import { TopicList } from '../molecules';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Closest, MiddleDistance, Global } from '../../Images/icons';
-import { StyleSheet } from 'react-native';
-import { mainColour, disabled } from '../../../style_variables';
+import React from "react";
+import { TopicList } from "../molecules";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Closest, MiddleDistance, Global } from "../../Images/icons";
+import { StyleSheet } from "react-native";
+import { mainColour, disabled } from "../../../style_variables";
 
 const Tab = createBottomTabNavigator();
 
@@ -14,42 +14,42 @@ export default function TopicPage({ navigation }: { navigation: any }) {
 				tabStyle: styles.tab,
 				showLabel: false,
 				activeTintColor: mainColour,
-        inactiveTintColor: disabled,
-      }}
-      lazy={true}
+				inactiveTintColor: disabled
+			}}
+			lazy={true}
 		>
 			<Tab.Screen
 				name="closest"
 				options={{
-					tabBarLabel: '',
-					tabBarIcon: ({ color, size }) => (
+					tabBarLabel: "",
+					tabBarIcon: ({ color }: { color: string }) => (
 						<Closest style={styles.icon} color={color} />
-					),
+					)
 				}}
 			>
-				{() => <TopicList distance='closest' navigation={navigation} />}
+				{() => <TopicList distance="closest" navigation={navigation} />}
 			</Tab.Screen>
 			<Tab.Screen
 				name="middle"
 				options={{
-					tabBarLabel: '',
-					tabBarIcon: ({ color, size }) => {
+					tabBarLabel: "",
+					tabBarIcon: ({ color }: { color: string }) => {
 						return <MiddleDistance style={styles.icon} color={color} />;
-					},
+					}
 				}}
 			>
-				{() => <TopicList distance='midrange' navigation={navigation} />}
+				{() => <TopicList distance="midrange" navigation={navigation} />}
 			</Tab.Screen>
 			<Tab.Screen
 				name="global"
 				options={{
-					tabBarLabel: '',
-					tabBarIcon: ({ color, size }) => (
+					tabBarLabel: "",
+					tabBarIcon: ({ color }: { color: string }) => (
 						<Global style={styles.icon} color={color} />
-					),
+					)
 				}}
 			>
-				{() => <TopicList distance='furthest' navigation={navigation} />}
+				{() => <TopicList distance="furthest" navigation={navigation} />}
 			</Tab.Screen>
 		</Tab.Navigator>
 	);
@@ -59,11 +59,11 @@ const styles = StyleSheet.create({
 	tab: {
 		padding: 10,
 		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
+		justifyContent: "center",
+		alignItems: "center"
 	},
 	icon: {
-		height: '100%',
-		width: '100%',
-	},
+		height: "100%",
+		width: "100%"
+	}
 });

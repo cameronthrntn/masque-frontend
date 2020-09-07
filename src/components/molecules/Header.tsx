@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import {
 	mainColour,
-	mainDark,
-	mainColourLight,
-	mainLight,
+	mainDark
 } from '../../../style_variables';
 import Logo from '../../Images/masque_logo.svg';
 import { Settings } from '../../Images/icons';
