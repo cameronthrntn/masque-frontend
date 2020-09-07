@@ -7,6 +7,8 @@ const getErrorMessage = (code: number) => {
 	switch (code) {
 		case 502:
 			return "Could not connect to the server.";
+		case 404:
+			return "The requested resource could not be found.";
 		default:
 			return "There was an unexpected error.";
 	}
@@ -16,7 +18,9 @@ export default function ErrorComponent({ code }: { code: number }) {
 	return (
 		<View style={styles.errorContainer}>
 			<ErrorIcon style={styles.maskStyle as StyleProp<ViewStyle>} />
-			<Text style={[styles.errorMessage, { marginBottom: 25, fontWeight: 'bold' }]}>
+			<Text
+				style={[styles.errorMessage, { marginBottom: 25, fontWeight: "bold" }]}
+			>
 				{getErrorMessage(code)}
 			</Text>
 			<Text style={styles.errorMessage}>Please try again later.</Text>
