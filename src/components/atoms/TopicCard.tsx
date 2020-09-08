@@ -26,6 +26,7 @@ export default function TopicCard({
 	const date = new Date(topic.created_at);
 	const timerVal = (Date.now() - date.getTime()) / 1000;
 	const [timeLeft] = useState<number>(7200 - timerVal);
+	const [isExpired, setIsExpired] = useState<boolean>(expired);
 
 	return isStatic ? (
 		<View style={styles.topicCard}>
@@ -38,8 +39,8 @@ export default function TopicCard({
 				until={timeLeft}
 				onFinish={() => setExpired(true)}
 				size={20}
-				style={styles.countdown}
-				digitStyle={styles.countdownDigits}
+				style={commentCountdown.countdown}
+				digitStyle={commentCountdown.countdownDigits}
 				digitTxtStyle={{ color: expired ? disabled : mainColour }}
 				separatorStyle={{ color: expired ? disabled : mainColour }}
 				timeToShow={["H", "M", "S"]}
@@ -56,7 +57,25 @@ export default function TopicCard({
 		>
 			<>
 				<Text style={styles.title}>{topic.title}</Text>
+				<CountDown
+					until={timeLeft}
+					onFinish={() => {
+						setExpired(true);
+						setIsExpired(true);
+					}}
+					size={13}
+					style={staticCountdown.countdown}
+					digitStyle={staticCountdown.countdownDigits}
+					digitTxtStyle={{ color: isExpired ? disabled : mainColour }}
+					separatorStyle={{ color: isExpired ? disabled : mainColour }}
+					timeToShow={["H", "M", "S"]}
+					timeLabels={{}}
+					showSeparator
+				/>
 				<Text style={styles.content}>{topic.content}</Text>
+				<Text style={styles.commentCount}>
+					{Math.round(Math.random() * 10)} comments
+				</Text>
 			</>
 		</TouchableHighlight>
 	);
@@ -68,7 +87,8 @@ const styles = StyleSheet.create({
 		borderBottomColor: mainColour,
 		borderBottomWidth: 0.2,
 		padding: 15,
-		paddingBottom: 15
+		paddingBottom: 0,
+		paddingRight: 0
 	},
 	commentTopicWrapper: {
 		flexDirection: "row",
@@ -80,17 +100,38 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		color: mainLight,
 		fontSize: 16,
+		marginRight: 15,
 		flex: 1,
 		flexWrap: "wrap"
 	},
-	content: {
-		color: mainLight
+	commentCount: {
+		color: mainColour,
+		textAlign: "right",
+		alignSelf: "flex-end",
+		margin: 10
 	},
+	content: {
+		color: mainLight,
+		marginRight: 15
+	}
+});
+
+const commentCountdown = StyleSheet.create({
 	countdown: {
 		marginTop: 10
 	},
 	countdownDigits: {
 		backgroundColor: mainDark,
 		color: mainColour
+	}
+});
+
+const staticCountdown = StyleSheet.create({
+	countdownDigits: {
+		backgroundColor: mainDark,
+		color: mainColour
+	},
+	countdown: {
+		width: 110
 	}
 });
