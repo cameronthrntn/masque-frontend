@@ -9,6 +9,7 @@ import {
 import { TopicInterface } from "../../interfaces";
 import CountDown from "react-native-countdown-component";
 import Mask from "./Mask";
+import { LockPage } from "../organisms";
 
 export default function TopicCard({
 	topic,
@@ -54,6 +55,7 @@ export default function TopicCard({
 			underlayColor="#000"
 			onPress={() => navigation.navigate("Comments", { topic_id: topic.id })}
 			style={styles.topicCard}
+			disabled={isExpired}
 		>
 			<>
 				<Text style={styles.title}>{topic.title}</Text>
@@ -76,6 +78,7 @@ export default function TopicCard({
 				<Text style={styles.commentCount}>
 					{Math.round(Math.random() * 10)} comments
 				</Text>
+				{isExpired && <LockPage />}
 			</>
 		</TouchableHighlight>
 	);
@@ -121,14 +124,14 @@ const commentCountdown = StyleSheet.create({
 		marginTop: 10
 	},
 	countdownDigits: {
-		backgroundColor: mainDark,
+		backgroundColor: "rgba(0,0,0,0)",
 		color: mainColour
 	}
 });
 
 const staticCountdown = StyleSheet.create({
 	countdownDigits: {
-		backgroundColor: mainDark,
+		backgroundColor: "rgba(0,0,0,0)",
 		color: mainColour
 	},
 	countdown: {
