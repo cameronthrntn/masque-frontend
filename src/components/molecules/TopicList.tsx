@@ -4,7 +4,8 @@ import {
 	View,
 	FlatList,
 	RefreshControl,
-	Alert
+	Alert,
+	Text
 } from "react-native";
 import { mainDark, mainColour, red } from "../../../style_variables";
 import { getTopics } from "../../services/api";
@@ -26,6 +27,7 @@ export default function TopicList({
 	const [page, setPage] = useState<number>(1);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<number>(0);
+	const [fetching, setFetching] = useState<boolean>(false);
 
 	useEffect(() => {
 		const fetchTopics = async () => {
@@ -67,6 +69,7 @@ export default function TopicList({
 						page
 					);
 					setTopics([...topics, ...data]);
+					setFetching(false);
 				},
 				error => Alert.alert(error.message),
 				{ enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 }
@@ -100,7 +103,11 @@ export default function TopicList({
 
 	switch (true) {
 		case loading:
-			return <Loading items="topics" />;
+			return (
+				<View style={loadingStyles.container}>
+					<Loading height={75} width={65} />
+				</View>
+			);
 		case error !== 0:
 			return <ErrorComponent code={error} />;
 		default:
@@ -110,14 +117,25 @@ export default function TopicList({
 						<FlatList
 							data={topics}
 							renderItem={renderItem}
-							keyExtractor={item => item.id.toString()}
+							keyExtractor={(item: TopicInterface) =>
+								item.id + Math.round(Math.random() * 500).toString()
+							}
 							style={styles.list}
 							refreshControl={
 								<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
 							}
-							onEndReached={() => setPage(page + 1)}
+							onEndReached={() => {
+								setFetching(true);
+								setPage(page + 1);
+							}}
 							onEndReachedThreshold={0.3}
 						/>
+						{fetching && (
+							<View style={styles.fetchingContainer}>
+								<Loading height={30} width={20} />
+								<Text style={styles.fetchingText}>Fetching new threads</Text>
+							</View>
+						)}
 					</View>
 					<NewThread navigation={navigation} />
 				</>
@@ -130,5 +148,35 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: mainDark
 	},
+	fetchingContainer: {
+		backgroundColor: mainDark,
+		borderColor: mainColour,
+		borderTopWidth: 1,
+		height: 50,
+		elevation: 3,
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "center",
+		alignItems: "center"
+	},
+	fetchingText: {
+		color: mainColour,
+		marginLeft: 15
+	},
 	list: {}
+});
+
+const loadingStyles = StyleSheet.create({
+	container: {
+		flex: 1,
+		flexDirection: "column",
+		justifyContent: "flex-start",
+		alignItems: "center",
+		paddingTop: 25
+	},
+	logoWrapper: {
+		marginBottom: 25,
+		marginTop: 50
+	},
+	logo: { width: "80%", height: 75 }
 });
