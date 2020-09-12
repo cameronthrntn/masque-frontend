@@ -5,19 +5,16 @@ import {
 	FlatList,
 	RefreshControl,
 	Alert,
-	Text
+	Text,
 } from "react-native";
-import { mainDark, mainColour, red } from "../../../style_variables";
+import { mainDark, mainColour } from "../../../style_variables";
 import { getTopics } from "../../services/api";
 import { TopicInterface } from "../../interfaces";
-import { TopicCard } from "../atoms";
-import NewThread from "../atoms/NewThread";
-import Loading from "../atoms/Loading";
-import ErrorComponent from "../atoms/ErrorComponent";
+import { TopicCard, NewThread, ErrorComponent, Loading } from "../atoms";
 
 export default function TopicList({
 	distance = "furthest",
-	navigation
+	navigation,
 }: {
 	distance: string;
 	navigation: any;
@@ -51,7 +48,7 @@ export default function TopicList({
 						}
 					}
 				},
-				error => Alert.alert(error.message),
+				(error) => Alert.alert(error.message),
 				{ enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 }
 			);
 		};
@@ -71,7 +68,7 @@ export default function TopicList({
 					setTopics([...topics, ...data]);
 					setFetching(false);
 				},
-				error => Alert.alert(error.message),
+				(error) => Alert.alert(error.message),
 				{ enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 }
 			);
 		};
@@ -95,7 +92,7 @@ export default function TopicList({
 				);
 				setTopics(data);
 			},
-			error => Alert.alert(error.message),
+			(error) => Alert.alert(error.message),
 			{ enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 }
 		);
 		setRefreshing(false);
@@ -146,7 +143,7 @@ export default function TopicList({
 const styles = StyleSheet.create({
 	listContainer: {
 		flex: 1,
-		backgroundColor: mainDark
+		backgroundColor: mainDark,
 	},
 	fetchingContainer: {
 		backgroundColor: mainDark,
@@ -157,13 +154,13 @@ const styles = StyleSheet.create({
 		display: "flex",
 		flexDirection: "row",
 		justifyContent: "center",
-		alignItems: "center"
+		alignItems: "center",
 	},
 	fetchingText: {
 		color: mainColour,
-		marginLeft: 15
+		marginLeft: 15,
 	},
-	list: {}
+	list: {},
 });
 
 const loadingStyles = StyleSheet.create({
@@ -172,11 +169,11 @@ const loadingStyles = StyleSheet.create({
 		flexDirection: "column",
 		justifyContent: "flex-start",
 		alignItems: "center",
-		paddingTop: 25
+		paddingTop: 25,
 	},
 	logoWrapper: {
 		marginBottom: 25,
-		marginTop: 50
+		marginTop: 50,
 	},
-	logo: { width: "80%", height: 75 }
+	logo: { width: "80%", height: 75 },
 });
