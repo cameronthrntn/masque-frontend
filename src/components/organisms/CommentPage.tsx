@@ -101,7 +101,7 @@ export default function CommentPage({
 			) : (
 				<ActivityIndicator size="large" color={mainColour} />
 			)}
-			{/* <LockPage /> */}
+			{expired && <LockPage internal />}
 		</View>
 	);
 }
