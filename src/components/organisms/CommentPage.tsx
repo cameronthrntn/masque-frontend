@@ -6,12 +6,13 @@ import {
 	RefreshControl,
 	FlatList,
 	ActivityIndicator,
+	Dimensions,
 } from 'react-native';
 import { TopicCard, CommentCard } from '../atoms';
 import { TopicInterface, CommentInterface } from '../../interfaces';
 import { getTopic } from '../../services/api';
 import { getComments } from '../../services/api';
-import { mainColour } from '../../../style_variables';
+import { mainColour, red } from '../../../style_variables';
 import LockPage from './LockPage';
 
 export default function CommentPage({
@@ -93,11 +94,14 @@ export default function CommentPage({
 	return (
 		<View style={styles.commentPage}>
 			{topic ? (
-				getList()
+				<>
+					{getList()}
+					<View style={styles.commentInputSection}></View>
+				</>
 			) : (
 				<ActivityIndicator size="large" color={mainColour} />
 			)}
-			<LockPage />
+			{/* <LockPage /> */}
 		</View>
 	);
 }
@@ -105,5 +109,15 @@ export default function CommentPage({
 const styles = StyleSheet.create({
 	commentPage: {
 		flex: 1,
+	},
+	commentInputSection: {
+    height: 50,
+    width: Dimensions.get("screen").width,
+		borderColor: red,
+    borderWidth: 1,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0
 	},
 });
