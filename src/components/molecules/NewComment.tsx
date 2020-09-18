@@ -6,6 +6,7 @@ import {
 	TextInput,
 	StyleProp,
 	ViewStyle,
+	Alert,
 } from "react-native";
 import {
 	disabled,
@@ -14,14 +15,31 @@ import {
 	mainLight,
 } from "../../../style_variables";
 import { SubmitIcon } from "../../Images/icons";
+import { CommentInterface } from "../../interfaces";
+import { postComment } from "../../services/api/comments";
 
-export default function NewComment() {
+export default function NewComment({ topic_id }: { topic_id: number }) {
 	const [comment, setComment] = useState<string>("");
 	const [canSubmit, setCanSubmit] = useState<boolean>(false);
+	const [error, setError] = useState<number>(0);
 
 	useEffect(() => {
 		comment.length ? setCanSubmit(true) : setCanSubmit(false);
 	}, [comment]);
+
+	const submitComment = async () => {
+		try {
+			const posted: CommentInterface = await postComment(
+				comment,
+				4,
+				topic_id,
+				0
+      );
+      //TODO: post comment and show at top of list for optimistic loading
+		} catch (e) {
+			setError(e.response.status);
+		}
+	};
 
 	return (
 		<View style={styles.commentInputSection}>
@@ -42,8 +60,10 @@ export default function NewComment() {
 					styles.submit,
 					{ color: canSubmit ? mainColour : disabled } as StyleProp<ViewStyle>,
 				]}
+				onPress={submitComment}
 			/>
 		</View>
+    //TODO: if error show a toast of submission failure
 	);
 }
 
