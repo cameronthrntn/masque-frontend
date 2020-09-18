@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
 	View,
 	Text,
@@ -6,14 +6,13 @@ import {
 	RefreshControl,
 	FlatList,
 	ActivityIndicator,
-	Dimensions,
-} from 'react-native';
-import { TopicCard, CommentCard } from '../atoms';
-import { TopicInterface, CommentInterface } from '../../interfaces';
-import { getTopic } from '../../services/api';
-import { getComments } from '../../services/api';
-import { mainColour, red } from '../../../style_variables';
-import LockPage from './LockPage';
+} from "react-native";
+import { TopicCard, CommentCard } from "../atoms";
+import { TopicInterface, CommentInterface } from "../../interfaces";
+import { getComments, getTopic } from "../../services/api";
+import { mainColour } from "../../../style_variables";
+import LockPage from "./LockPage";
+import { NewComment } from "../molecules";
 
 export default function CommentPage({
 	route,
@@ -82,7 +81,7 @@ export default function CommentPage({
 						setExpired={setExpired}
 					/>
 					<Text
-						style={{ alignSelf: 'center', marginTop: 20, color: mainColour }}
+						style={{ alignSelf: "center", marginTop: 20, color: mainColour }}
 					>
 						No Comments loaded
 					</Text>
@@ -96,7 +95,7 @@ export default function CommentPage({
 			{topic ? (
 				<>
 					{getList()}
-					<View style={styles.commentInputSection}></View>
+					<NewComment />
 				</>
 			) : (
 				<ActivityIndicator size="large" color={mainColour} />
@@ -109,15 +108,5 @@ export default function CommentPage({
 const styles = StyleSheet.create({
 	commentPage: {
 		flex: 1,
-	},
-	commentInputSection: {
-    height: 50,
-    width: Dimensions.get("screen").width,
-		borderColor: red,
-    borderWidth: 1,
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0
 	},
 });

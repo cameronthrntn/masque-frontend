@@ -5,3 +5,4 @@ export {default as NewTopic} from './new_topic.svg';
 export {default as Settings} from './settings.svg';
 export {default as Lock} from './lock.svg';
 export {default as ErrorIcon} from './error.svg';
+export {default as SubmitIcon} from './submit_icon.svg';
