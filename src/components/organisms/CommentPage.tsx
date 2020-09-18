@@ -95,7 +95,7 @@ export default function CommentPage({
 			{topic ? (
 				<>
 					{getList()}
-					<NewComment />
+					<NewComment topic_id={topic.id} />
 				</>
 			) : (
 				<ActivityIndicator size="large" color={mainColour} />
