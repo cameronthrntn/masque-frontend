@@ -1,22 +1,17 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableHighlight } from "react-native";
-import {
-	mainColour,
-	mainLight,
-	mainDark,
-	disabled
-} from "../../../style_variables";
+import { mainColour, mainLight, disabled } from "../../../style_variables";
 import { TopicInterface } from "../../interfaces";
 import CountDown from "react-native-countdown-component";
 import Mask from "./Mask";
-import { LockPage } from "../organisms";
+import LockPage from "./LockPage";
 
 export default function TopicCard({
 	topic,
 	navigation,
 	isStatic,
 	expired = false,
-	setExpired = () => {}
+	setExpired = () => {},
 }: {
 	topic: TopicInterface;
 	navigation: any;
@@ -91,13 +86,13 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 0.2,
 		padding: 15,
 		paddingBottom: 0,
-		paddingRight: 0
+		paddingRight: 0,
 	},
 	commentTopicWrapper: {
 		flexDirection: "row",
 		justifyContent: "center",
 		alignItems: "center",
-		marginBottom: 15
+		marginBottom: 15,
 	},
 	title: {
 		fontWeight: "bold",
@@ -105,36 +100,36 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		marginRight: 15,
 		flex: 1,
-		flexWrap: "wrap"
+		flexWrap: "wrap",
 	},
 	commentCount: {
 		color: mainColour,
 		textAlign: "right",
 		alignSelf: "flex-end",
-		margin: 10
+		margin: 10,
 	},
 	content: {
 		color: mainLight,
-		marginRight: 15
-	}
+		marginRight: 15,
+	},
 });
 
 const commentCountdown = StyleSheet.create({
 	countdown: {
-		marginTop: 10
+		marginTop: 10,
 	},
 	countdownDigits: {
 		backgroundColor: "rgba(0,0,0,0)",
-		color: mainColour
-	}
+		color: mainColour,
+	},
 });
 
 const staticCountdown = StyleSheet.create({
 	countdownDigits: {
 		backgroundColor: "rgba(0,0,0,0)",
-		color: mainColour
+		color: mainColour,
 	},
 	countdown: {
-		width: 110
-	}
+		width: 110,
+	},
 });

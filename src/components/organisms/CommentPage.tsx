@@ -7,11 +7,10 @@ import {
 	FlatList,
 	ActivityIndicator,
 } from "react-native";
-import { TopicCard, CommentCard } from "../atoms";
+import { TopicCard, CommentCard, LockPage } from "../atoms";
 import { TopicInterface, CommentInterface } from "../../interfaces";
 import { getComments, getTopic } from "../../services/api";
 import { mainColour } from "../../../style_variables";
-import LockPage from "./LockPage";
 import { NewComment } from "../molecules";
 
 export default function CommentPage({
