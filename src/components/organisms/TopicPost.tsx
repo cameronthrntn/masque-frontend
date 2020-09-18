@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
 	View,
 	Text,
@@ -6,21 +6,19 @@ import {
 	StyleSheet,
 	TouchableHighlight,
 	Alert,
-} from 'react-native';
+} from "react-native";
 import {
 	mainColour,
 	mainLight,
-	mainColourLight,
 	mainDark,
 	disabled,
-} from '../../../style_variables';
-import { postTopic } from '../../services/api';
-import { render } from 'react-dom';
-import { TopicInterface } from '../../interfaces';
+} from "../../../style_variables";
+import { postTopic } from "../../services/api/topics";
+import { TopicInterface } from "../../interfaces";
 
 export default function TopicPost({ navigation }: { navigation: any }) {
-	const [topicTitle, setTopicTitle] = useState<string>('');
-	const [topicText, setTopicText] = useState<string>('');
+	const [topicTitle, setTopicTitle] = useState<string>("");
+	const [topicText, setTopicText] = useState<string>("");
 	const [highlighted, toggleHighlighted] = useState<boolean>(false);
 
 	return (
@@ -64,7 +62,7 @@ export default function TopicPost({ navigation }: { navigation: any }) {
 								longitude,
 								latitude
 							);
-							navigation.navigate('Comments', { topic_id: posted.id });
+							navigation.navigate("Comments", { topic_id: posted.id });
 						},
 						(error) => Alert.alert(error.message),
 						{ enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 }
@@ -82,13 +80,12 @@ export default function TopicPost({ navigation }: { navigation: any }) {
 
 const styles = StyleSheet.create({
 	inputContainer: { padding: 15 },
-	colour: { color: mainColour, alignSelf: 'center' },
-	highlightedColour: { color: mainDark, alignSelf: 'center' },
+	colour: { color: mainColour, alignSelf: "center" },
+	highlightedColour: { color: mainDark, alignSelf: "center" },
 	heading: {
 		color: mainColour,
 		fontSize: 26,
 		marginBottom: 20,
-		// marginTop: 20
 	},
 	input: {
 		borderBottomColor: mainColour,
@@ -96,7 +93,7 @@ const styles = StyleSheet.create({
 		color: mainLight,
 	},
 	titleInput: {
-		fontWeight: 'bold',
+		fontWeight: "bold",
 		marginBottom: 15,
 	},
 	textInput: {
@@ -108,6 +105,6 @@ const styles = StyleSheet.create({
 		borderWidth: 5,
 		width: 200,
 		color: mainColour,
-		alignSelf: 'center',
+		alignSelf: "center",
 	},
 });

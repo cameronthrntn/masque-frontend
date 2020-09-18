@@ -9,7 +9,8 @@ import {
 } from "react-native";
 import { TopicCard, CommentCard, LockPage } from "../atoms";
 import { TopicInterface, CommentInterface } from "../../interfaces";
-import { getComments, getTopic } from "../../services/api";
+import { getTopic } from "../../services/api/topics";
+import { getComments } from "../../services/api/comments";
 import { mainColour } from "../../../style_variables";
 import { NewComment } from "../molecules";
 
@@ -49,7 +50,7 @@ export default function CommentPage({
 			return comments.length ? (
 				<FlatList
 					data={comments}
-					renderItem={({ item, index, separators }) => {
+					renderItem={({ item, index }) => {
 						return index === 0 ? (
 							<>
 								<TopicCard

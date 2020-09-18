@@ -8,7 +8,7 @@ import {
 	Text,
 } from "react-native";
 import { mainDark, mainColour } from "../../../style_variables";
-import { getTopics } from "../../services/api";
+import { getTopics } from "../../services/api/topics";
 import { TopicInterface } from "../../interfaces";
 import { TopicCard, NewThread, ErrorComponent, Loading } from "../atoms";
 
